@@ -4,6 +4,7 @@ import { RevealOnScroll } from "./_components/reveal";
 import { ArrowDown, ArrowRight, Check, Clock } from "./_components/icons";
 import { ScrollLitText, SmoothWheel } from "./_components/scroll-effects";
 import { AppConnections, NotificationSwitches } from "./_components/toggles";
+import { WaitlistModal } from "./_components/waitlist-modal";
 import badges from "@/public/images/badges.webp";
 import calendar from "@/public/images/calendar.webp";
 import card from "@/public/images/card.webp";
@@ -13,7 +14,8 @@ import phoneHome from "@/public/images/phone-home.webp";
 import phoneTracking from "@/public/images/phone-tracking.webp";
 import wallet from "@/public/images/wallet.webp";
 
-const WAITLIST = "#get-started";
+// every waitlist button opens the signup popup (see _components/waitlist-modal.tsx)
+const WAITLIST = "#waitlist";
 
 const NAV = [
   { href: "#how", label: "How it works" },
@@ -72,6 +74,7 @@ export default function Home() {
     <div id="top" className="ww">
       <SmoothWheel />
       <RevealOnScroll />
+      <WaitlistModal />
 
       {/* ============ NAV ============ */}
       <div className="sticky top-3.5 z-50 px-4">
@@ -123,7 +126,7 @@ export default function Home() {
             />
           </div>
           <div className="glass-soft reveal flex items-center gap-2.5 rounded-full py-2 pr-[18px] pl-3 text-[15px] font-medium text-(--ink)">
-            <span aria-hidden="true" className="blob morph-soft size-3 bg-(--green)" />
+            <span aria-hidden="true" className="shrink-0 blob morph-soft size-3 bg-(--green)" />
             <span>Early sign-ups get 6 months of Premium free</span>
           </div>
           <h1 className="reveal m-0 text-[clamp(44px,7cqi,100px)] leading-[1.02] font-normal tracking-[-0.045em] text-balance text-(--ink)">
@@ -156,7 +159,7 @@ export default function Home() {
             <div className="blob morph aspect-[1.12] w-[clamp(300px,56cqi,760px)]" style={{ background: "var(--grad)" }} />
           </div>
           <Deco
-            className="par-up"
+            className="par-up max-sm:!left-[calc(55%_-_clamp(170px,34cqi,470px))]"
             style={{ left: "calc(50% - clamp(170px, 34cqi, 470px))", top: "58%", width: "clamp(40px, 7cqi, 96px)" }}
             blob={{ cls: "morph-b", background: "var(--lime)" }}
           />

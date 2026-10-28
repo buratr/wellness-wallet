@@ -825,6 +825,130 @@ body {
     height: 12px;
   }
 
+  /* ============ waitlist popup ============ */
+  .waitlist {
+    width: min(640px, calc(100% - 32px));
+    max-width: none;
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 44px;
+    background: #fff;
+    color: var(--text);
+    box-shadow: 0 60px 120px -40px rgba(20, 26, 69, 0.45);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .waitlist::backdrop {
+    background: rgba(70, 76, 96, 0.38);
+    -webkit-backdrop-filter: blur(14px) saturate(0.9);
+    backdrop-filter: blur(14px) saturate(0.9);
+  }
+  .waitlist[open] {
+    animation: ww-pop 0.5s var(--ease) both;
+  }
+  .waitlist[open]::backdrop {
+    animation: ww-fade 0.4s ease both;
+  }
+  .waitlist-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: clamp(28px, 6vw, 40px);
+  }
+  .waitlist-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--muted);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .waitlist-close:hover {
+    background: rgba(20, 26, 69, 0.06);
+    color: var(--ink);
+  }
+  .waitlist-title {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+  .waitlist-lead {
+    margin: -6px auto 8px;
+    max-width: 480px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.4;
+    font-weight: 300;
+    text-wrap: pretty;
+  }
+  .waitlist-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .waitlist-field input,
+  .waitlist-field textarea {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid rgba(20, 26, 69, 0.12);
+    border-radius: 28px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 300;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .waitlist-field textarea {
+    min-height: 110px;
+  }
+  .waitlist-field input::placeholder,
+  .waitlist-field textarea::placeholder {
+    color: rgba(90, 95, 130, 0.65);
+  }
+  .waitlist-field input:focus,
+  .waitlist-field textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 4px rgba(0, 185, 203, 0.15);
+  }
+  .waitlist .btn:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  @keyframes ww-pop {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes ww-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
   /* ============ time-based motion ============ */
   @keyframes ww-morph {
     0%,
@@ -1028,7 +1152,7 @@ body {
     html {
       scroll-behavior: auto;
     }
-    .ww *:not(.marquee-track, .hold-fill),
+    .ww *:not(.marquee-track, .hold-fill, .waitlist),
     .ww *::before,
     .ww *::after {
       /* looping/scroll animations stop (the ticker and hold-to-commit fill keep running); hover transitions stay smooth */
@@ -1061,6 +1185,19 @@ body {
     .plan {
       padding: 32px 26px;
     }
+    .waitlist {
+      border-radius: 20px;
+    }
+    .waitlist-close {
+      top: 6px;
+      right: 6px;
+      width: 32px;
+      height: 32px;
+    }
+    .waitlist-field input,
+    .waitlist-field textarea {
+      border-radius: 20px;
+    }
   }
   @container (min-width: 1120px) {
     .span-2 {
@@ -1068,6 +1205,7 @@ body {
     }
   }
 }
+
 
 
 
