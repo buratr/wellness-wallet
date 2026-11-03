@@ -26,7 +26,8 @@ export async function POST(request: Request) {
 
   const email = clean(body.email, 254).toLowerCase();
   const source = clean(body.source, 200);
-  const motivation = clean(body.motivation, 1000);
+  // Mailchimp text fields hold at most 255 characters
+  const motivation = clean(body.motivation, 255);
 
   if (!EMAIL_RE.test(email)) {
     return Response.json({ error: "Please enter a valid email address." }, { status: 400 });

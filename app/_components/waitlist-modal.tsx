@@ -101,7 +101,7 @@ export function WaitlistModal() {
                 <textarea
                   name="motivation"
                   rows={3}
-                  maxLength={1000}
+                  maxLength={255}
                   placeholder="I want to commit money to my fitness goals and unlock it when I make progress."
                 />
               </label>
